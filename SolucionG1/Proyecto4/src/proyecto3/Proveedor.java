@@ -20,11 +20,11 @@ public class Proveedor implements Runnable{
     }
     @Override
     public void run(){
-            Random rnd = new Random();
-            rnd.setSeed(System.currentTimeMillis()+id);
+            Random rnd = new Random();  // new Random(System.nanoTime()+id)
+            rnd.setSeed(System.currentTimeMillis()+id);  // esto no se necesita con lo de arriba
             int cantidad=rnd.nextInt(4)+2;
             System.out.println(" .......................... Soy el Proveedor "+id+" y pongo "+ cantidad);
-            alm.Deposita(id,cantidad);
+            alm.Deposita(id,cantidad);  //llama a deposita de almacen, la id es solo para el sout
             System.out.println("........................... Soy el Proveedor "+id+" marchandome");
     }
 
