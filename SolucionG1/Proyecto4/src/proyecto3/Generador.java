@@ -18,7 +18,7 @@ public class Generador {
     public static void main(String[] args) throws InterruptedException {
         // TODO code application logic here
 
-        Random rnd = new Random();
+        Random rnd = new Random();  //new Random(System.nanoTime())
         rnd.setSeed(System.currentTimeMillis());
         Thread cl[] = new Thread[15];
         Almacen alm = new Almacen(10, 2);
