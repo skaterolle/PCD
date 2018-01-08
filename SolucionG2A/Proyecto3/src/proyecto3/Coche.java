@@ -26,11 +26,11 @@ public class Coche implements Runnable{
             Random rnd = new Random();
             rnd.setSeed(System.currentTimeMillis()+id);
             System.out.println(" .......................... Soy el Coche "+id+" sucio");
-            int cual=lv.Llegacoche();
+            int cual=lv.Llegacoche(); // llama a llegaCoche de lavadero
             System.out.println(" .......................... Soy el Coche "+id+" LAVANDOSE en "+cual);            
             Thread.sleep((rnd.nextInt(5)+2)*1000);
             System.out.println("........................... Soy el Coche "+id+" LIMPIO");
-            lv.SaleCoche(cual);
+            lv.SaleCoche(cual); // llama a la funcion saleCoche de lavadero 
         } catch (InterruptedException ex) {
             Logger.getLogger(Coche.class.getName()).log(Level.SEVERE, null, ex);
         }
