@@ -26,10 +26,10 @@ public class Almacen {
 
     public void Deposita(int id, int cuanto) {
         try {
-            mutex.lock();
-            while (capacidad - fruta < cuanto) {
-                hayhueco.await();
-            }
+            mutex.lock(); //no permite que entre si hay otro con el lock bloqueado
+            while (capacidad - fruta < cuanto) { // |——————————————| cantidad
+                hayhueco.await();                //       |————————| fruta 
+            }.                                   //    |———————————|cuanto
             fruta = fruta + cuanto;
             System.out.println("CONTENIDO: " + fruta);
             hayfruta.signalAll();
@@ -37,7 +37,7 @@ public class Almacen {
             System.out.println(id + "No ha podido entregar la fruta");
             System.exit(0);
         } finally {
-            mutex.unlock();
+            mutex.unlock();  //desbloque el mutex
         }
     }
 
