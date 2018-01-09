@@ -16,7 +16,7 @@ public class Cliente extends Thread{
     
     public Cliente(int i, Almacen al){
         id=i;
-        alm=al;
+        alm=al; //cada hilo accede al mismo almacen ya que si no fuese asi el almacen siempre estaria vacio
     }
     @Override
     public void run(){
