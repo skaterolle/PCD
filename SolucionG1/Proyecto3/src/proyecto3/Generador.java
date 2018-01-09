@@ -21,21 +21,21 @@ public class Generador {
         Random rnd = new Random();
         rnd.setSeed(System.currentTimeMillis());
         Thread cl[] = new Thread[10];
-        Almacen alm = new Almacen(10,2);
+        Almacen alm = new Almacen(10,2); //Capacidad=10 y fruta=2 al principio
         System.out.println("Lanzando clientes .....");
         for (int i = 0; i < 10; i++) {
             if(rnd.nextInt(2)%2==1){
                 cl[i] = new Cliente(i,alm);
             }
             else{
-                cl[i] = new Thread(new Proveedor(i,alm));                
+                cl[i] = new Thread(new Proveedor(i,alm));  //Proveedor implement Runnable
             }
             cl[i].start();
             Thread.sleep((rnd.nextInt(2)+1)*1000);
         }
         Thread.sleep(2000);
         for (int i = 0; i < 10; i++) {
-            cl[i].interrupt();
+            cl[i].interrupt(); //Bucle para parar todos los hilos por si no habian terminado
         }
         System.out.println("Todos los clientes finalizados");
     }
