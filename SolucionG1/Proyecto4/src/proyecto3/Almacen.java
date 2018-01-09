@@ -15,8 +15,8 @@ public class Almacen {
 
     private int capacidad;
     private int fruta;
-    ReentrantLock mutex = new ReentrantLock();
-    Condition hayfruta = mutex.newCondition();
+    ReentrantLock mutex = new ReentrantLock(); //Semaphore principal
+    Condition hayfruta = mutex.newCondition(); //Condiciones ya que todos utilizan el mismo almacen
     Condition hayhueco = mutex.newCondition();
 
     public Almacen(int _capacidad, int _fruta) {
@@ -37,7 +37,7 @@ public class Almacen {
             System.out.println(id + "No ha podido entregar la fruta");
             System.exit(0);
         } finally {
-            mutex.unlock();  //desbloque el mutex
+            mutex.unlock();  //desbloquea el mutex
         }
     }
 
@@ -45,7 +45,7 @@ public class Almacen {
         try {
             int intentos = 0;
             mutex.lock();
-            while (fruta < cuanto && intentos < 2) {
+            while (fruta < cuanto && intentos < 2) {//Los intentos son para que no se quede de manera indefinida cargado el hilo
                 hayfruta.await();
                 intentos++;
             }
@@ -55,13 +55,13 @@ public class Almacen {
                 hayhueco.signalAll();
             }
             else{
-                System.out.println(id+" se marcha ABURRIDO");
+                System.out.println(id+" se marcha ABURRIDO"); //Cuando los intentos superan o son 2
             }
         } catch (InterruptedException ex) {
             System.out.println(id + "No ha podido comprar la fruta");
             System.exit(0);
         } finally {
-            mutex.unlock();
+            mutex.unlock(); //Con finally siempre se ejecuta por si el try salta al catch para que no termine directamente
         }
 
     }
