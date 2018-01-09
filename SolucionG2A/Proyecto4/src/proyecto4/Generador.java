@@ -26,7 +26,7 @@ public class Generador {
         // TODO code application logic here
 
         int ntt = 0;
-        ExecutorService thp = Executors.newFixedThreadPool(2);
+        ExecutorService thp = Executors.newFixedThreadPool(2);//Estas dos lineas son necesarias para el thread pool
         ArrayList<Future<Integer>> result = new ArrayList<>();
 
         Random rnd = new Random();
@@ -41,7 +41,7 @@ public class Generador {
                 ntt++;
 
             } else {
-                result.add(thp.submit(new Coche(i, lv)));
+                result.add(thp.submit(new Coche(i, lv)));//result es la cola de mensajes que recogemos de los coches
             }
             Thread.sleep((rnd.nextInt(3) + 1) * 1000);
         }
