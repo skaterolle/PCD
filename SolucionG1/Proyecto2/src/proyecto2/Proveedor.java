@@ -14,7 +14,7 @@ import java.util.concurrent.Semaphore;
 public class Proveedor implements Runnable {
 
     private int id;
-    private Semaphore fruta;
+    private Semaphore fruta; //Lo inicializamos con el del generador
 
     public Proveedor(int i, Semaphore fruta) {
         id = i;
@@ -23,12 +23,12 @@ public class Proveedor implements Runnable {
 
     @Override
     public void run() {
-        Random rnd = new Random();
-        rnd.setSeed(System.currentTimeMillis() + id);
+        Random rnd = new Random();   // Toma el tiempo que lleva ejecutado el programa
+        rnd.setSeed(System.currentTimeMillis() + id); //Toma el tiempo del pc en ms
         int cantidad = rnd.nextInt(4) + 2;
         System.out.println(" .......................... Soy el Proveedor " + id + " y pongo " + cantidad);
         for (int i = 0; i < cantidad; i++) {
-            fruta.release();
+            fruta.release(); // Lo soltamos ya que estaba cogido del cliente
         }
         System.out.println("........................... Soy el Proveedor " + id + " marchandome");
     }
