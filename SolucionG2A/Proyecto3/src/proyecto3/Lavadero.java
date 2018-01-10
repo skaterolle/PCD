@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class Lavadero {
 
     private boolean cochelibre = true, ttlibre = true;
-    Lock mutex = new ReentrantLock();
+    ReentranLock mutex = new ReentrantLock();
     int ttencola = 0;
     Condition colacoche = mutex.newCondition();
     Condition colatt = mutex.newCondition();
